@@ -1,0 +1,32 @@
+clonar o projeto:
+no terminal, dentro da pasta onde o projeto será baixado digite:
+git clone https://github.com/alexandreheigi82/tcc.git
+
+após baixar o projeto, entre na pasta do projeto
+CD TCC
+
+inicie o projeto no VSCode com o comando: code .
+
+abra o terminal do VSCode e comece a instalar o projeto com:
+
+composer install
+npm install
+
+configure o arquivo .ENV do projeto para conectar ao DB.
+no nosso caso:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tur
+DB_USERNAME=root
+DB_PASSWORD=
+
+crie uma chave com o comando no terminal:
+
+php artisan key:generate
+
+após, faça as migrations com:
+
+php artisan migration
+npm run dev
+php artisan serve
