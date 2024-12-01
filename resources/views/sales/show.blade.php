@@ -9,9 +9,10 @@
             <p><strong>Cliente:</strong> {{ $sale->client->nome }} {{ $sale->client->sobrenome }}</p>
             <p><strong>Pacote:</strong> {{ $sale->package->titulo }}</p>
             <p><strong>Descrição:</strong> {{ $sale->package->descricao }}</p>
-            <p><strong>Valor:</strong> R$ {{ $sale->package->valor }}</p>
+            <p><strong>Valor:</strong> R$ {{ number_format($sale->package->valor, 2, ',', '.') }}</p>
             <p><strong>Quantidade:</strong> {{ $sale->quantidade }}</p>
             <p><strong>Vendedor:</strong> {{ $sale->user->nome }}</p>
+            <p><strong>Valor Total:</strong> R$ {{ number_format($sale->valor_total, 2, ',', '.') }}</p> <!-- Novo campo adicionado -->
         </div>
 
         <div class="flex justify-between mb-4">

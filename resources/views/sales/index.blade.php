@@ -29,6 +29,7 @@
                         <th class="p-2 border-b border-gray-300">Pacote</th>
                         <th class="p-2 border-b border-gray-300">Quantidade</th>
                         <th class="p-2 border-b border-gray-300">ID Vendedor</th>
+                        <th class="p-2 border-b border-gray-300">Valor Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +41,11 @@
                         <td class="p-2 border-b border-gray-300">{{ $sale->package->titulo }}</td>
                         <td class="p-2 border-b border-gray-300">{{ $sale->quantidade }}</td>
                         <td class="p-2 border-b border-gray-300">{{ $sale->user_id }}</td>
+                        <td class="p-2 border-b border-gray-300">R$ {{ number_format($sale->valor_total, 2, ',', '.') }}</td>
                     </tr>
                     @else
                     <tr class="bg-gray-100 hover:bg-gray-200">
-                        <td colspan="5" class="p-2 border-b border-gray-300 text-center text-[#26535e]">Pacote relacionado foi removido.</td>
+                        <td colspan="6" class="p-2 border-b border-gray-300 text-center text-[#26535e]">Pacote relacionado foi removido.</td>
                     </tr>
                     @endif
                     @endforeach
@@ -53,16 +55,16 @@
 
         <!-- Botão de Criar Novo -->
         <div class="flex justify-between items-center mt-8">
-            <a href="{{ route('sales.create') }}" 
+            <a href="{{ route('sales.create') }}"
                class="bg-[#6cb3c3] text-white py-3 px-6 rounded-lg hover:bg-[#547cac] focus:outline-none focus:ring-2 focus:ring-[#547cac]">
                 Criar Novo
             </a>
-            <a href="{{ route('dashboard') }}" 
+            <a href="{{ route('dashboard') }}"
                class="bg-gray-500 text-white py-3 px-6 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400">
                 Voltar
             </a>
         </div>
-        
+
     </div>
 </div>
 @endsection

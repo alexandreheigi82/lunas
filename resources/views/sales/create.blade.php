@@ -58,6 +58,11 @@
                 <input type="text" id="vagas" readonly class="w-full p-2 rounded bg-gray-100 text-[#26535e] border border-gray-300 focus:ring-2 focus:ring-[#6cb3c3]">
             </div>
 
+            <div class="mb-4">
+                <label for="valor_total" class="block mb-2 text-[#26535e]">Valor Total:</label>
+                <input type="text" id="valor_total" name="valor_total" readonly class="w-full p-2 rounded bg-gray-100 text-[#26535e] border border-gray-300 focus:ring-2 focus:ring-[#6cb3c3]">
+            </div>
+
             <div class="flex justify-between">
                 <button type="submit" class="bg-[#6cb3c3] text-white font-bold py-2 px-4 rounded hover:bg-[#547cac] focus:outline-none focus:ring-2 focus:ring-[#547cac]">Concluir</button>
                 <button type="button" onclick="window.location.href='{{ route('dashboard') }}'" class="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500">Cancelar</button>
@@ -72,36 +77,55 @@
         const selectedOption = this.options[this.selectedIndex];
         const vagas = selectedOption.getAttribute('data-vagas');
         document.getElementById('vagas').value = vagas;
+
+        // Atualiza o valor total com base na quantidade e valor do pacote
+        atualizarValorTotal();
     });
+
+    // Atualiza o valor total quando a quantidade muda
+    document.getElementById('quantidade').addEventListener('input', function() {
+        atualizarValorTotal();
+    });
+
+    function atualizarValorTotal() {
+        const packageSelect = document.getElementById('package_id');
+        const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+        const valor = parseFloat(selectedOption.getAttribute('data-valor'));
+        const quantidade = parseInt(document.getElementById('quantidade').value);
+        const valorTotal = valor * quantidade;
+
+        document.getElementById('valor_total').value = valorTotal.toFixed(2);
+    }
 
     // Pesquisa dinâmica de clientes
     document.getElementById('client_search').addEventListener('input', function() {
-        const term = this.value;
-        if (term.length > 2) {
-            fetch(`/clients/search?term=${term}`)
-                .then(response => response.json())
-                .then(data => {
-                    let clientList = document.getElementById('client_list');
-                    clientList.innerHTML = '';
-                    data.forEach(client => {
-                        let div = document.createElement('div');
-                        div.textContent = `${client.nome} ${client.sobrenome}`;
-                        div.style.padding = '8px';
-                        div.style.cursor = 'pointer';
-                        div.classList.add('hover:bg-gray-200');
-                        div.addEventListener('click', function() {
-                            document.getElementById('client_search').value = `${client.nome} ${client.sobrenome}`;
-                            document.getElementById('client_id').value = client.id;
-                            clientList.style.display = 'none';
-                        });
-                        clientList.appendChild(div);
+    const term = this.value;
+    if (term.length > 2) {
+        fetch(`/clients/search?term=${term}`)
+            .then(response => response.json())
+            .then(data => {
+                let clientList = document.getElementById('client_list');
+                clientList.innerHTML = '';
+                data.forEach(client => {
+                    let div = document.createElement('div');
+                    div.textContent = `${client.nome} ${client.sobrenome}`;
+                    div.style.padding = '8px';
+                    div.style.cursor = 'pointer';
+                    div.classList.add('hover:bg-gray-200');
+                    div.addEventListener('click', function() {
+                        document.getElementById('client_search').value = `${client.nome} ${client.sobrenome}`;
+                        document.getElementById('client_id').value = client.id;
+                        clientList.style.display = 'none';
                     });
-                    clientList.style.display = 'block';
+                    clientList.appendChild(div);
                 });
-        } else {
-            document.getElementById('client_list').style.display = 'none';
-        }
-    });
+                clientList.style.display = 'block';
+            });
+    } else {
+        document.getElementById('client_list').style.display = 'none';
+    }
+});
+
 
     // Fecha a lista de clientes se clicar fora dela
     document.addEventListener('click', function(event) {

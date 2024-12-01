@@ -10,7 +10,8 @@ class Sale extends Model
         'client_id',
         'user_id',
         'package_id',
-        'quantidade'
+        'quantidade',
+        'valor_total'
     ];
 
     // Relacionamentos

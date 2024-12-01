@@ -19,40 +19,44 @@ class SaleController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'package_id' => 'required|exists:packages,id',
-            'quantidade' => 'required|integer|min:1',
-        ]);
+{
+    $request->validate([
+        'client_id' => 'required|exists:clients,id',
+        'package_id' => 'required|exists:packages,id',
+        'quantidade' => 'required|integer|min:1',
+    ]);
 
-        
+    $package = Package::findOrFail($request->package_id);
 
-        $package = Package::findOrFail($request->package_id);
-
-        // Verifique se o pacote está ativo
-        if ($package->situacao != 1) {
-            return redirect()->back()->withErrors(['package_id' => 'Este pacote não está disponível para venda.']);
-        }
-
-        $quantidade_vagas_disponiveis = $package->vagas - $request->quantidade;
-
-        if ($quantidade_vagas_disponiveis < 0) {
-            return back()->withErrors(['quantidade' => 'Quantidade excede o número de vagas disponíveis']);
-        }
-
-        // Atualizar a quantidade de vagas disponíveis no pacote
-        $package->update(['vagas' => $quantidade_vagas_disponiveis]);
-
-        Sale::create([
-            'client_id' => $request->client_id,
-            'user_id' => Auth::id(),
-            'package_id' => $request->package_id,
-            'quantidade' => $request->quantidade,
-        ]);
-
-        return redirect()->route('sales.index')->with('success', 'Venda realizada com sucesso!'); // Redirecionar para a lista de vendas
+    if ($package->situacao != 1) {
+        return redirect()->back()->withErrors(['package_id' => 'Este pacote não está disponível para venda.']);
     }
+
+    $quantidade_vagas_disponiveis = $package->vagas - $request->quantidade;
+
+    if ($quantidade_vagas_disponiveis < 0) {
+        return back()->withErrors(['quantidade' => 'Quantidade excede o número de vagas disponíveis']);
+    }
+
+    $package->update(['vagas' => $quantidade_vagas_disponiveis]);
+
+    $valor_total = $package->valor * $request->quantidade;
+
+    $sale = Sale::create([
+        'client_id' => $request->client_id,
+        'user_id' => Auth::id(),
+        'package_id' => $request->package_id,
+        'quantidade' => $request->quantidade,
+        'valor_total' => $valor_total,
+    ]);
+
+    return redirect()->route('sales.index')->with('success', 'Venda realizada com sucesso!');
+}
+
+
+
+
+
 
     public function index(Request $request)
     {
@@ -86,42 +90,36 @@ class SaleController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'package_id' => 'required|exists:packages,id',
-            'quantidade' => 'required|integer|min:1',
-        ]);
+{
+    $request->validate([
+        'client_id' => 'required|exists:clients,id',
+        'package_id' => 'required|exists:packages,id',
+        'quantidade' => 'required|integer|min:1',
+    ]);
 
-        $sale = Sale::findOrFail($id);
-        $package = Package::findOrFail($request->package_id);
+    $sale = Sale::findOrFail($id);
+    $package = Package::findOrFail($request->package_id);
 
-        // Verifique se o pacote está ativo
-        if ($package->situacao != 1) {
-            return redirect()->back()->withErrors(['package_id' => 'Este pacote não está disponível para venda.']);
-        }
+    $quantidade_vagas_disponiveis = $package->vagas + $sale->quantidade - $request->quantidade;
 
-        // Restaurar vagas anteriores
-        $quantidade_vagas_disponiveis = $package->vagas + $sale->quantidade;
-
-        // Subtrair vagas conforme a nova quantidade
-        $quantidade_vagas_disponiveis -= $request->quantidade;
-
-        if ($quantidade_vagas_disponiveis < 0) {
-            return back()->withErrors(['quantidade' => 'Quantidade excede o número de vagas disponíveis']);
-        }
-
-        // Atualizar a quantidade de vagas disponíveis no pacote
-        $package->update(['vagas' => $quantidade_vagas_disponiveis]);
-
-        $sale->update([
-            'client_id' => $request->client_id,
-            'package_id' => $request->package_id,
-            'quantidade' => $request->quantidade,
-        ]);
-
-        return redirect()->route('sales.show', $sale->id)->with('success', 'Venda atualizada com sucesso!');
+    if ($quantidade_vagas_disponiveis < 0) {
+        return back()->withErrors(['quantidade' => 'Quantidade excede o número de vagas disponíveis']);
     }
+
+    $package->update(['vagas' => $quantidade_vagas_disponiveis]);
+
+    $valor_total = $package->valor * $request->quantidade;
+
+    $sale->update([
+        'client_id' => $request->client_id,
+        'package_id' => $request->package_id,
+        'quantidade' => $request->quantidade,
+        'valor_total' => $valor_total,
+    ]);
+
+    return redirect()->route('sales.show', $sale->id)->with('success', 'Venda atualizada com sucesso!');
+}
+
 
     public function destroy($id)
     {

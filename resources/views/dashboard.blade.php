@@ -155,11 +155,11 @@
             <div class="dropdown" id="user-dropdown">
             <a href="{{ route('users.edit', Auth::user()->id) }}">Alterar Login</a>
                 <!-- <a href="{{ route('clients.create') }}">Cadastrar Cliente</a>
-                <a href="{{ route('clients.index') }}">Lista de Clientes</a> 
+                <a href="{{ route('clients.index') }}">Lista de Clientes</a>
                 <a href="{{ route('sales.create') }}">Efetuar Venda</a> -->
                 <a href="{{ route('packages.create') }}">Criar Pacote de Turismo</a>
                 <a href="{{ route('packages.inactive') }}">Pacotes Inativos</a>
-                <a href="{{ route('packages.index') }}">Ver Pacotes de Turismo</a>
+                <a href="{{ route('dashboard') }}">Ver Pacotes de Turismo</a>
                 <a href="{{ route('packages.inactive') }}">Pacotes Inativos</a>
                 <!-- <a href="{{ route('users.create') }}">Cadastrar Novo Usuário</a>
                 <a href="{{ route('users.index') }}">Visualizar Usuários</a>
@@ -185,57 +185,57 @@
         <h3 class="text-[#26535e] font-semibold text-xl mb-6 text-center">Tipos de Passeios</h3>
         <ul class="space-y-4">
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Todos']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Todos']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Todos') bg-[#bed8e0] @endif">
                    Todos
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Tranquilo']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Tranquilo']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Tranquilo') bg-[#bed8e0] @endif">
                    Tranquilo
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Urbano']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Urbano']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Urbano') bg-[#bed8e0] @endif">
                    Urbano
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Religioso']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Religioso']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Religioso') bg-[#bed8e0] @endif">
                    Religioso
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Ecoturismo']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Ecoturismo']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Ecoturismo') bg-[#bed8e0] @endif">
                    Ecoturismo
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Internacional']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Internacional']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Internacional') bg-[#bed8e0] @endif">
                    Internacional
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Gastronômico']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Gastronômico']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Gastronômico') bg-[#bed8e0] @endif">
                    Gastronômico
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard', ['tipo' => 'Esportivo']) }}" 
-                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left 
+                <a href="{{ route('dashboard', ['tipo' => 'Esportivo']) }}"
+                   class="text-[#26535e] font-semibold text-lg px-4 py-2 hover:bg-[#bed8e0] cursor-pointer rounded-md text-left
                    @if(request()->get('tipo') == 'Esportivo') bg-[#bed8e0] @endif">
                    Esportivo
                 </a>

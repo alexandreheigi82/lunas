@@ -21,7 +21,6 @@
             <div class="mb-4">
                 <label for="client_id" class="block mb-2">Cliente:</label>
                 <select name="client_id" id="client_id" required class="w-full p-2 rounded bg-gray-6cb3c3  text-6cb3c3">
-
                     @foreach ($clients as $client)
                     <option value="{{ $client->id }}" {{ $client->id == $sale->client_id ? 'selected' : '' }}>
                         {{ $client->nome }} {{ $client->sobrenome }}
@@ -43,6 +42,14 @@
                 <label for="quantidade" class="block mb-2">Quantidade:</label>
                 <input type="number" name="quantidade" id="quantidade" min="1" value="{{ $sale->quantidade }}" required class="w-full p-2 rounded bg-gray-6cb3c3  text-6cb3c3">
             </div>
+            <div class="mb-4">
+                <label for="vagas" class="block mb-2">Vagas Disponíveis:</label>
+                <input type="text" id="vagas" readonly class="w-full p-2 rounded bg-gray-100 text-[#26535e] border border-gray-300">
+            </div>
+            <div class="mb-4">
+                <label for="valor_total" class="block mb-2 text-[#26535e]">Valor Total:</label>
+                <input type="text" id="valor_total" name="valor_total" readonly class="w-full p-2 rounded bg-gray-100 text-[#26535e] border border-gray-300" value="{{ $sale->valor_total }}">
+            </div>
             <div class="flex justify-between">
                 <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-400">Salvar</button>
                 <button type="button" onclick="window.location.href='{{ route('sales.show', $sale->id) }}'" class="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-400">Cancelar</button>
@@ -52,14 +59,30 @@
 </div>
 
 <script>
+    function atualizarValorTotal() {
+        const packageSelect = document.getElementById('package_id');
+        const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+        const valor = parseFloat(selectedOption.getAttribute('data-valor'));
+        const quantidade = parseInt(document.getElementById('quantidade').value);
+        const valorTotal = valor * quantidade;
+
+        document.getElementById('valor_total').value = valorTotal.toFixed(2);
+    }
+
     document.getElementById('package_id').addEventListener('change', function() {
         const selectedOption = this.options[this.selectedIndex];
         const vagas = selectedOption.getAttribute('data-vagas');
         document.getElementById('vagas').value = vagas;
+        atualizarValorTotal();
     });
 
-    // Exibe as vagas disponíveis para o pacote selecionado
+    document.getElementById('quantidade').addEventListener('input', function() {
+        atualizarValorTotal();
+    });
+
+    // Exibe as vagas disponíveis e atualiza o valor total para o pacote selecionado inicialmente
     const initialSelectedOption = document.getElementById('package_id').selectedOptions[0];
     document.getElementById('vagas').value = initialSelectedOption.getAttribute('data-vagas');
+    atualizarValorTotal();
 </script>
 @endsection
