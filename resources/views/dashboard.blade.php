@@ -133,6 +133,16 @@
             transform: scale(1.02);
             transition: transform 0.3s;
         }
+        .pacote-card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: none; /* Remove qualquer borda aplicada à imagem */
+    box-shadow: none; /* Remove qualquer sombra ao redor da imagem */
+    margin: 0; /* Remove espaçamento ao redor */
+    padding: 0; /* Remove preenchimento */
+}
+
     </style>
 </head>
 

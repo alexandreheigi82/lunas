@@ -136,6 +136,7 @@
             transition: transform 0.3s;
         }
         
+        
     </style>
 </div>
 <body>
@@ -225,6 +226,28 @@
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         });
     </script>
+
+    <!-- Script para dropdown -->
+<script>
+    document.getElementById('user-dropdown-toggle').addEventListener('click', function() {
+        const dropdown = document.getElementById('user-dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+</script>
+
+<!-- Script para logout ao fechar o navegador -->
+<script>
+    window.addEventListener('beforeunload', function () {
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+        });
+    });
+</script>
+
+
 
     <!-- Rodapé -->
     <footer class="bg-[#547cac] py-6 mt-8 text-white text-center">

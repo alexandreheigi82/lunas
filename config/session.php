@@ -18,7 +18,13 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    
+    // config/session.php
+        //'driver' => env('SESSION_DRIVER', 'database'),
+    'driver' => env('SESSION_DRIVER', 'file'),  // Pode ser 'file', 'database', etc.
+    'lifetime' => 120,  // Duração da sessão em minutos
+    'expire_on_close' => true,  // A sessão expira quando o navegador é fechado
+
 
     /*
     |--------------------------------------------------------------------------
@@ -129,7 +135,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
 
     /*

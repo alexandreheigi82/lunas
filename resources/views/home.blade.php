@@ -49,45 +49,6 @@
         color: white;
     }
 
-    .user-info {
-        background-color: #547cac;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 1rem;
-        cursor: pointer;
-        position: relative;
-    }
-
-    .dropdown {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-        min-width: 200px;
-    }
-
-    .dropdown a {
-        display: block;
-        padding: 0.5rem 1rem;
-        color: #26535e;
-        text-decoration: none;
-        border-bottom: 1px solid #ddd;
-        transition: background-color 0.3s;
-    }
-
-    .dropdown a:hover {
-        background-color: #f1f1f1;
-    }
-
-    .dropdown a:last-child {
-        border-bottom: none;
-    }
-
     .sidebar {
         background-color: white;
         border-radius: 8px;
@@ -134,6 +95,19 @@
         transform: scale(1.02);
         transition: transform 0.3s;
     }
+
+    .pacote-card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: none; /* Remove qualquer borda aplicada à imagem */
+    box-shadow: none; /* Remove qualquer sombra ao redor da imagem */
+    margin: 0; /* Remove espaçamento ao redor */
+    padding: 0; /* Remove preenchimento */
+}
+
+
+    
     footer {
     background-color: #547cac;
     color: white;
@@ -296,7 +270,7 @@ footer a:hover {
                             <p class="mb-2 text-[#26535e]">Valor: R$ {{ number_format($package->valor, 2, ',', '.') }}</p>
                             <p class="mb-2 text-[#26535e]">Vagas: {{ $package->vagas }}</p>
                             @if ($package->imagem)
-                                <img src="{{ asset('storage/' . $package->imagem) }}" alt="{{ $package->titulo }}" class="mb-2 w-full h-48 object-cover rounded">
+                            <img src="{{ asset('storage/' . $package->imagem) }}" alt="{{ $package->titulo }}" class="mb-2 pacote-card img">
                             @endif
                         <a href="{{ $package->link }}" class="text-[#547cac] hover:underline mb-2 block">Link: Fale conosco</a>
                         @if (Auth::check())
@@ -355,8 +329,8 @@ footer a:hover {
     <div id="contatos" class="contatos">
         <h2>Entre em Contato</h2>
         <p>E-mail: <a href="mailto:contato@lunastour.com">contato@lunastour.com</a></p>
-        <p>Telefone: <a href="tel:+551112345678">(11) 1234-5678</a></p>
-        <p>Endereço: Rua das Viagens, 123 - São Paulo, SP</p>
+        <p>Telefone: <a href="tel:+551112345678">(44) 99741-1814</a></p>
+        <p>Endereço: Avenida Brão do Rio Branco, 67 - Douradina, PR</p>
     </div>
 
     <!-- Seção Sobre -->
