@@ -181,7 +181,7 @@
 
     <!-- Conteúdo Principal -->
     <div class="flex flex-col md:flex-row space-y-6 md:space-y-0">
-    <aside class="w-auto md:w-1/5 bg-white p-6 shadow-lg md:min-h-screen border-r border-gray-200">
+        <aside class="w-auto md:w-1/5 bg-white p-6 shadow-lg md:min-h-screen border-r border-gray-200">
         <h3 class="text-[#26535e] font-semibold text-xl mb-6 text-center">Tipos de Passeios</h3>
         <ul class="space-y-4">
             <li>
@@ -254,7 +254,7 @@
                     @foreach ($packages as $package)
                     <div class="pacote-card bg-white p-4 rounded-lg shadow-lg border border-[#6cb3c3]">
                         <h4 class="text-xl font-bold mb-2 text-[#26535e]">{{ $package->titulo }}</h4>
-                        <p class="mb-2 text-[#26535e]">{{ $package->descricao }}</p>
+                        <p class="mb-2 text-[#26535e]">{!! nl2br(e($package->descricao)) !!}</p>
                         <p class="mb-2 text-[#26535e]">Valor: R$ {{ number_format($package->valor, 2, ',', '.') }}</p>
                         <p class="mb-2 text-[#26535e]">Vagas: {{ $package->vagas }}</p>
 

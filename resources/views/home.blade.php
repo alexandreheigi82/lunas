@@ -292,7 +292,7 @@ footer a:hover {
                     @if ($package->situacao)
                     <div class="pacote-card bg-white p-4 rounded-lg border border-[#6cb3c3]">
                         <h4 class="text-xl font-bold mb-2 text-[#26535e]">{{ $package->titulo }}</h4>
-                        <p class="mb-2 text-[#26535e]">{{ $package->descricao }}</p>
+                        <p class="mb-2 text-[#26535e]">{!! nl2br(e($package->descricao)) !!}</p>
                         <p class="mb-2 text-[#26535e]">Valor: R$ {{ number_format($package->valor, 2, ',', '.') }}</p>
                         <p class="mb-2 text-[#26535e]">Vagas: {{ $package->vagas }}</p>
                         @if ($package->imagem)

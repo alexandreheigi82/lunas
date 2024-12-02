@@ -81,7 +81,8 @@
             <div class="flex justify-between mt-6">
                 <button type="submit" class="bg-[#6cb3c3] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#547cac] focus:outline-none focus:ring-2 focus:ring-[#547cac]">Salvar</button>
             <!-- Botões de ação -->
-            <button type="button" onclick="window.location.href='{{ route('clients.index') }}'" class="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-400">Cancelar</button>
+            <button type="button" onclick="window.location.href='{{ route('dashboard') }}'" class="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-400">Cancelar</button>
+
             </div>
         </form>
     </div>

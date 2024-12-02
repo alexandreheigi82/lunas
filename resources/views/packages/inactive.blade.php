@@ -1,8 +1,8 @@
 @extends('master')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-[#f4f7fb]">
-    <div class="p-8 rounded-lg shadow-lg w-full max-w-4xl">
+<div class="min-h-screen flex items-center justify-center">
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
         <h2 class="text-3xl font-bold text-center mb-6 text-[#6cb3c3]">Pacotes Desativados</h2>
 
         @if ($packages->isNotEmpty())
