@@ -251,7 +251,8 @@
                 <h3 class="text-2xl font-bold text-center mb-4 text-[#26535e]">Pacotes Disponíveis</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @if ($packages->isNotEmpty())
-                    @foreach ($packages as $package)
+                    @foreach($packages as $package)
+                    @if ($package->situacao && $package->vagas > 0)
                     <div class="pacote-card bg-white p-4 rounded-lg shadow-lg border border-[#6cb3c3]">
                         <h4 class="text-xl font-bold mb-2 text-[#26535e]">{{ $package->titulo }}</h4>
                         <p class="mb-2 text-[#26535e]">{!! nl2br(e($package->descricao)) !!}</p>
@@ -267,6 +268,7 @@
                             <a href="{{ route('packages.show', ['package' => $package->id]) }}" class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-400">Detalhes</a>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                     @else
                     <p class="text-center col-span-3 text-[#26535e]">Nenhum pacote disponível.</p>
