@@ -181,7 +181,7 @@
 
     <!-- Conteúdo Principal -->
     <div class="flex flex-col md:flex-row space-y-6 md:space-y-0">
-        <aside class="w-auto md:w-1/5 bg-white p-6 shadow-lg md:min-h-screen border-r border-gray-200">
+    <aside class="w-auto md:w-1/5 bg-white p-6 shadow-lg md:min-h-screen border-r border-gray-200">
         <h3 class="text-[#26535e] font-semibold text-xl mb-6 text-center">Tipos de Passeios</h3>
         <ul class="space-y-4">
             <li>
